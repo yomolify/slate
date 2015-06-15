@@ -19,7 +19,7 @@ You can view code examples in the dark area to the right.
 
 
 
-# EMI Related API
+# EMR API
 
 ## Reminder notifications and changes to an EMR
 
@@ -49,7 +49,7 @@ curl -v POST "http://api.rangehealthpro.com/emr/api/patient_change_event"
 
 `POST /emr/api/patient_change_event`
 
-# Messaging API
+# Messages API
 
 ## Create a Direct Message from an EMR Message
 
