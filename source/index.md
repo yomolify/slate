@@ -359,7 +359,7 @@ curl -v GET "http://rangehealthpro.com/api/person/264809e90cf0d618312737f24/summ
 `GET /api/person/:id/summary/:type`
 
 
-## List labResults of specified person
+## List lab results of specified person
 
 ```shell
 curl -v GET "http://rangehealthpro.com/api/person/7231410cf0d618312737f24/labresult/?test=bloodTest" \
