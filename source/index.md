@@ -81,7 +81,7 @@ curl -v POST "http://rangehealthpro.com/emr/api/message" \
 		"messages": [
 			{
     			emrId: 789051f9cf0d616452737p12,
-   				text: "Hey dude, I am an EMR message with target @pat",
+   				text: "Hi, I am an EMR message with target @pat",
     			subject: "EMR Test Message",
     			emrMessageId: 558051f9cf0d618312737e38,
     			timestamp: 12569537939,
@@ -90,7 +90,7 @@ curl -v POST "http://rangehealthpro.com/emr/api/message" \
     			to: [{
         			initials: "@pat"
     			}],
-    			from: "@con",
+    			from: "@con",	
     			patientId: 456751f9cf0d618312737e86,
     			_directMsg: 25073f9cf0d618920737e81,
     			_directConvo: 176485f9cf0d618312737w80
