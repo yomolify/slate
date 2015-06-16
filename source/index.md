@@ -1,14 +1,6 @@
 ---
 title: API Reference
 
-connnection
-ids
-quotes
-addon
-read specified attachment remove but leave get
-attachment create
-all post and puts should have bodies
-
 
 includes:
   - errors
