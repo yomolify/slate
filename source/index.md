@@ -465,8 +465,7 @@ curl -v GET "http://api.rangehealthpro.com/api/connection-request/?status=pendin
 
 
 ```shell
-curl -v GET "http://api.rangehealthpro.com/api/connection-request/55805e90cf0d618312737e39/?status=
-pending" \
+curl -v GET "http://api.rangehealthpro.com/api/connection-request/55805e90cf0d618312737e39/?status=pending" \
   -H "Content-Type:application/json" 
  ```
 
