@@ -154,35 +154,6 @@ curl -v GET "http://api.rangehealthpro.com/emr/api/event/558051f9cf0d618312737f6
 
 # API/ATTACH
 
-## Get profile of user
-
-
-
-```shell
-curl -v GET "http://api.rangehealthpro.com/api/user/richardwong" \
-  -H "Content-Type:application/json"
-```
-
-
-### HTTP Request
-
-`GET /api/user/:user`
-
-
-## Get details of logged in user
-
-
-
-```shell
-curl -v GET "http://api.rangehealthpro.com/api/userDetails/" \
-  -H "Content-Type:application/json"
-```
-
-
-### HTTP Request
-
-`GET /api/userDetails`
-
 
 ## List direct messages
 
@@ -524,19 +495,6 @@ curl -v DELETE "http://api.rangehealthpro.com/api/connection-request/75039e90cf0
 ### HTTP Request
 
 `DELETE /api/connection-request/:id`
-
-
-## Read Addon
-
-```shell
-curl -v GET "http://api.rangehealthpro.com/api/addon/?emrobject1" \
-  -H "Content-Type:application/json" 
- ```
-
-
-### HTTP Request
-
-`GET /api/addon`
 
 
 ## Get specified attachment
