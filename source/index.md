@@ -23,15 +23,26 @@ You can view code examples in the dark area to the right.
 
 
 ```shell
-curl -v POST "http://rangehealthpro.com/emr/api/update" \
+curl -v POST "http://rangehealthpro.com/emr/api/update/?emr=Doe" \
   -H "Content-Type:application/json" \
   -d '{
-		"messages": [
-			{
-				"key1": "value1",
-				"key2": "value2"
-			}
-		]
+  	   "messages": 
+  			{
+  		  "messages":[
+  				{
+  					"updates":[
+  						{
+  							"timestamp": 12569537329,
+							"id": 55798976,
+							"userInitials": "AS",
+							"patientId": 748320123,
+							"displayText": "EMR Text version",
+							"tags": ["Patient", "Rx", "High priority"]
+						}
+					]
+				}
+			]
+		}
 	}'
 ```
 
@@ -45,12 +56,10 @@ curl -v POST "http://rangehealthpro.com/emr/api/update" \
 
 
 ```shell
-curl -v POST "http://rangehealthpro.com/emr/api/patient_change_event" \
+curl -v POST "http://rangehealthpro.com/emr/api/patient_change_event/?emr=John" \
   -H "Content-Type:application/json" \
   -d '{
-		"patientChangeEvent": [
-			"patientCEvent1", "patientCEvent2"
-		]
+		"patientChangeEvent": [101, 107, 754]
 	}'
 ```
 
@@ -70,7 +79,22 @@ curl -v POST "http://rangehealthpro.com/emr/api/message" \
   -H "Content-Type:application/json" \
   -d '{
 		"messages": [
-			"emrMessage1", "emrMessage2"
+			{
+    			emrId: 789051f9cf0d616452737p12,
+   				text: "Hey dude, I am an EMR message with target @pat",
+    			subject: "EMR Test Message",
+    			emrMessageId: 558051f9cf0d618312737e38,
+    			timestamp: 12569537939,
+    			chainId: 558051f9cf0d618312737f67,
+    			emrConvoId: 798121f9cf0d618312737f68,
+    			to: [{
+        			initials: "@pat"
+    			}],
+    			from: "@con",
+    			patientId: 456751f9cf0d618312737e86,
+    			_directMsg: 25073f9cf0d618920737e81,
+    			_directConvo: 176485f9cf0d618312737w80
+			}
 		]
 	}'
 ```
