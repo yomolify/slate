@@ -388,7 +388,7 @@ curl -v GET "http://rangehealthpro.com/api/person/947260cf0d618312737f24/rx-time
 ## List entries of logged-in user
 
 ```shell
-curl -v GET "http://api.rangehealthpro.com/api/entry/?limit=5" \
+curl -v GET "http://rangehealthpro.com/api/entry/?limit=5" \
   -H "Content-Type:application/json" 
  ```
 
@@ -400,7 +400,7 @@ curl -v GET "http://api.rangehealthpro.com/api/entry/?limit=5" \
 ## Read profile of logged-in user
 
 ```shell
-curl -v GET "http://api.rangehealthpro.com/api/profile" \
+curl -v GET "http://rangehealthpro.com/api/profile" \
   -H "Content-Type:application/json" 
  ```
 
@@ -414,7 +414,7 @@ curl -v GET "http://api.rangehealthpro.com/api/profile" \
 ## Update profile of logged-in user
 
 ```shell
-curl -v PUT "http://api.rangehealthpro.com/api/profile" \
+curl -v PUT "http://rangehealthpro.com/api/profile" \
   -H "Content-Type:application/json" \
   -d '{
   		"profile": 
@@ -442,7 +442,7 @@ curl -v PUT "http://api.rangehealthpro.com/api/profile" \
 ## Read permissions of logged-in user
 
 ```shell
-curl -v GET "http://api.rangehealthpro.com/api/permission" \
+curl -v GET "http://rangehealthpro.com/api/permission" \
   -H "Content-Type:application/json" 
  ```
 
