@@ -237,14 +237,14 @@ curl -v POST "http://rangehealthpro.com/api/direct-msg/markAsRead" \
 
 
 ```shell
-curl -v POST "http://rangehealthpro.com/api/event/?owner=Ash&forUser=Shawn&start=567480238&end=612349062" \
+curl -v GET "http://rangehealthpro.com/api/event/?owner=Ash&forUser=Shawn&start=567480238&end=612349062" \
   -H "Content-Type:application/json"
 ```
 
 
 ### HTTP Request
 
-`POST /api/event`
+`GET /api/event`
 
 
 ## Read an event
