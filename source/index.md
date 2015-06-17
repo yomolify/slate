@@ -156,21 +156,6 @@ curl -v POST "https://rangehealthpro.com/emr/api/event" \
 `POST /emr/api/event`
 
 
-## Retrieve a RangeHealth appointment
-
-When an appointment is created in the RangeHealth web application and a notification is sent to the EMR, a request is then made to retrieve the contents.
-
-```shell
-curl -v GET "https://rangehealthpro.com/emr/api/event/558051f9cf0d618312737f67" \
-  -H "Content-Type:application/json"
-```
-
-
-### HTTP Request
-
-`GET /emr/api/event/:id`
-
-
 
 # Direct Messages
 
@@ -289,29 +274,6 @@ curl -v GET "https://rangehealthpro.com/api/event/558051f9cf0d618312737f67" \
 
 `GET /api/event/:id`
 
-
-## Create an event
-
-
-
-```shell
-curl -v POST "https://rangehealthpro.com/api/event" \
-  -H "Content-Type:application/json" \
-  -d '{
-  		"owner": "Ron",
-  		"subject": "Sample Event",
-  		"type": "example",
-  		"description": "Hey, I am a sample event",
-  		"topic": "Mysteries of the sample event",
-  		"location": "Vancouver",
-  		"description": "This will be a huge event"  		
-  	}'
-```
-
-
-### HTTP Request
-
-`POST /api/event`
 
 # Person
 
