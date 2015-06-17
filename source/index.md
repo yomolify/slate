@@ -16,14 +16,16 @@ You can view code examples in the dark area to the right.
 
 
 
-# EMR Data
+# EMR Communication
 
-## Reminder notifications and changes to an EMR
+The following end points are for use by the EMR server to communicate with the RangeHealth web application.
 
+## EMR changes and reminder notifications
 
+When a reminder activates, or a change is made in the EMR system, a notification is sent to the RangeHealth web application.
 
 ```shell
-curl -v POST "http://rangehealthpro.com/emr/api/update/?emr=Doe" \
+curl -v POST "https://rangehealthpro.com/emr/api/update/?emr=Doe" \
   -H "Content-Type:application/json" \
   -d '{
   	   "messages": 
@@ -52,11 +54,12 @@ curl -v POST "http://rangehealthpro.com/emr/api/update/?emr=Doe" \
 `POST /emr/api/update`
 
 
-## Recieves notification that a patient has been changed in the EMR
+## EMR patient change
 
+When a change is made to a patient record, a notification is sent to the RangeHealth web application.
 
 ```shell
-curl -v POST "http://rangehealthpro.com/emr/api/patient_change_event/?emr=John" \
+curl -v POST "https://rangehealthpro.com/emr/api/patient_change_event/?emr=John" \
   -H "Content-Type:application/json" \
   -d '{
 		"patientChangeEvent": [101, 107, 754]
@@ -70,12 +73,12 @@ curl -v POST "http://rangehealthpro.com/emr/api/patient_change_event/?emr=John" 
 
 # EMR Messages
 
-## Create a Direct Message from an EMR Message
+## EMR message sent
 
-
+When a new message is sent between EMR users, a notification is sent to the RangeHealth web application.
 
 ```shell
-curl -v POST "http://rangehealthpro.com/emr/api/message" \
+curl -v POST "https://rangehealthpro.com/emr/api/message" \
   -H "Content-Type:application/json" \
   -d '{
 		"messages": [
@@ -104,12 +107,12 @@ curl -v POST "http://rangehealthpro.com/emr/api/message" \
 
 `POST /emr/api/message`
 
-## Read a message
+## Message retrieval
 
-
+When a message is sent in the RangeHealth web application, and the EMR system is notified, it will then retrieve the message contents.
 
 ```shell
-curl -v GET "http://rangehealthpro.com/emr/api/message/557989f28f2a7a91d36b26e6" \
+curl -v GET "https://rangehealthpro.com/emr/api/message/557989f28f2a7a91d36b26e6" \
   -H "Content-Type:application/json"  
 ```
 
@@ -119,12 +122,12 @@ curl -v GET "http://rangehealthpro.com/emr/api/message/557989f28f2a7a91d36b26e6"
 `GET /emr/api/message/:id`
 
 
-## Update a message
+## Conversation update
 
-
+When a new message is sent in an existing conversation thread, the conversation is updated and a notification is sent to the RangeHealth web application.
 
 ```shell
-curl -v PUT "http://rangehealthpro.com/emr/api/message/557989f28f2a7a91d36b26e6/?convoId=558051f9cf0d618312737e38&messageId=558051f9cf0d618312737f67" \
+curl -v PUT "https://rangehealthpro.com/emr/api/message/557989f28f2a7a91d36b26e6/?convoId=558051f9cf0d618312737e38&messageId=558051f9cf0d618312737f67" \
   -H "Content-Type:application/json"
 ```
 
@@ -133,14 +136,14 @@ curl -v PUT "http://rangehealthpro.com/emr/api/message/557989f28f2a7a91d36b26e6/
 
 `PUT /emr/api/message/:id`
 
-# EMR Events
+# EMR Appointments
 
-## Create an EMR Event
+## Create an EMR appointment
 
-
+When an appointment is entered into the EMR appointment book, a notification is sent to the RangeHealth web application.
 
 ```shell
-curl -v POST "http://rangehealthpro.com/emr/api/event" \
+curl -v POST "https://rangehealthpro.com/emr/api/event" \
   -H "Content-Type:application/json" \
   -d '{
   		"data": ["emrEvent1", "emrEvent2"]
@@ -153,11 +156,12 @@ curl -v POST "http://rangehealthpro.com/emr/api/event" \
 `POST /emr/api/event`
 
 
-## Read an EMR Event
+## Retrieve a RangeHealth appointment
 
+When an appointment is created in the RangeHealth web application and a notification is sent to the EMR, a request is then made to retrieve the contents.
 
 ```shell
-curl -v GET "http://rangehealthpro.com/emr/api/event/558051f9cf0d618312737f67" \
+curl -v GET "https://rangehealthpro.com/emr/api/event/558051f9cf0d618312737f67" \
   -H "Content-Type:application/json"
 ```
 
@@ -171,12 +175,12 @@ curl -v GET "http://rangehealthpro.com/emr/api/event/558051f9cf0d618312737f67" \
 # Direct Messages
 
 
-## List direct messages
+## List direct messages (example shows archived messages)
 
 
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/direct-msg/?read=true&tags=archive" \
+curl -v GET "https://rangehealthpro.com/api/direct-msg/?tags=archive" \
   -H "Content-Type:application/json"
 ```
 
@@ -190,7 +194,7 @@ curl -v GET "http://rangehealthpro.com/api/direct-msg/?read=true&tags=archive" \
 
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/direct-msg/558051f9cf0d618312737f67" \
+curl -v GET "https://rangehealthpro.com/api/direct-msg/558051f9cf0d618312737f67" \
   -H "Content-Type:application/json"
 ```
 
@@ -204,13 +208,13 @@ curl -v GET "http://rangehealthpro.com/api/direct-msg/558051f9cf0d618312737f67" 
 
 
 ```shell
-curl -v POST "http://rangehealthpro.com/api/direct-msg" \
+curl -v POST "https://rangehealthpro.com/api/direct-msg" \
   -H "Content-Type:application/json" \
   -d '{
   		"from": 558051f9cf0d618312737f68,
   		"to": [target1, target2],
   		"re": [558051f9cf0d618312737f67],
-  		"text": "Hey, I am a msg"
+  		"text": "Sample message text"
   	}'
 ```
 
@@ -225,7 +229,7 @@ curl -v POST "http://rangehealthpro.com/api/direct-msg" \
 
 
 ```shell
-curl -v POST "http://rangehealthpro.com/api/direct-msg/archive" \
+curl -v POST "https://rangehealthpro.com/api/direct-msg/archive" \
   -H "Content-Type:application/json" \
   -d '{
   		"ids": [558051f9cf0d618312737f67, 456751f9cf0d618312737e86, 789051f9cf0d616452737p12]
@@ -242,7 +246,7 @@ curl -v POST "http://rangehealthpro.com/api/direct-msg/archive" \
 
 
 ```shell
-curl -v POST "http://rangehealthpro.com/api/direct-msg/markAsRead" \
+curl -v POST "https://rangehealthpro.com/api/direct-msg/markAsRead" \
   -H "Content-Type:application/json" \
   -d '{
   		"ids": [558051f9cf0d618312737f67, 456751f9cf0d618312737e86, 789051f9cf0d616452737p12]  
@@ -261,7 +265,7 @@ curl -v POST "http://rangehealthpro.com/api/direct-msg/markAsRead" \
 
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/event/?owner=Ash&forUser=Shawn&start=567480238&end=612349062" \
+curl -v GET "https://rangehealthpro.com/api/event/?owner=558051f9cf0d618312737f67&forUser=558051f9cf0d618312737f67&start=567480238&end=612349062" \
   -H "Content-Type:application/json"
 ```
 
@@ -271,12 +275,12 @@ curl -v GET "http://rangehealthpro.com/api/event/?owner=Ash&forUser=Shawn&start=
 `GET /api/event`
 
 
-## Read an event
+## Get event details
 
 
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/event/558051f9cf0d618312737f67" \
+curl -v GET "https://rangehealthpro.com/api/event/558051f9cf0d618312737f67" \
   -H "Content-Type:application/json"
 ```
 
@@ -291,7 +295,7 @@ curl -v GET "http://rangehealthpro.com/api/event/558051f9cf0d618312737f67" \
 
 
 ```shell
-curl -v POST "http://rangehealthpro.com/api/event" \
+curl -v POST "https://rangehealthpro.com/api/event" \
   -H "Content-Type:application/json" \
   -d '{
   		"owner": "Ron",
@@ -311,12 +315,12 @@ curl -v POST "http://rangehealthpro.com/api/event" \
 
 # Person
 
-## Read a person minimally
+## Retrieve basic person details
 
 
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/person/558051f9cf0d618312737f67" \
+curl -v GET "https://rangehealthpro.com/api/person/558051f9cf0d618312737f67" \
   -H "Content-Type:application/json"
 ```
 
@@ -325,12 +329,12 @@ curl -v GET "http://rangehealthpro.com/api/person/558051f9cf0d618312737f67" \
 
 `GET /api/person/:id`
 
-## Read a person with options
+## Retrieve record entries (and person details)
 
 
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/record/558051f9cf0d618312737f67/?filterBy=profile.prefs.fullname&useCached=true" \
+curl -v GET "https://rangehealthpro.com/api/record/558051f9cf0d618312737f67/?filterBy=form" \
   -H "Content-Type:application/json"
 ```
 
@@ -339,16 +343,16 @@ curl -v GET "http://rangehealthpro.com/api/record/558051f9cf0d618312737f67/?filt
 
 `GET /api/record/:id`
 
-## Create a record
+## Create a record entry
 
 
 
 ```shell
-curl -v POST "http://rangehealthpro.com/api/record" \
+curl -v POST "https://rangehealthpro.com/api/record" \
   -H "Content-Type:application/json" \
   -d '{
   		"target": 558051f9cf0d618312737f67,
-  		"message": "Hey, you are my target",
+  		"message": "Sample record entry (note)",
   		"attachments": [attach1, attach2]
   	}'
 ```
@@ -357,10 +361,13 @@ curl -v POST "http://rangehealthpro.com/api/record" \
 
 `POST /api/record/`
 
-## List all connected persons of logged in user
+## List fellow organization members OR people matching the specified name
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/person/?name=Ash&orgs=Doc" \
+curl -v GET "https://rangehealthpro.com/api/person/?orgs=true" \
+  -H "Content-Type:application/json"
+
+curl -v GET "https://rangehealthpro.com/api/person/?name=Ash" \
   -H "Content-Type:application/json" 
  ```
 
@@ -373,7 +380,7 @@ curl -v GET "http://rangehealthpro.com/api/person/?name=Ash&orgs=Doc" \
 ## Return a filtered list of record entries for a given person
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/person/264809e90cf0d618312737f24/summary/cct" \
+curl -v GET "https://rangehealthpro.com/api/person/264809e90cf0d618312737f24/summary/cct" \
   -H "Content-Type:application/json" 
  ```
 
@@ -386,7 +393,7 @@ curl -v GET "http://rangehealthpro.com/api/person/264809e90cf0d618312737f24/summ
 ## List lab results of specified person
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/person/7231410cf0d618312737f24/labresult/?test=bloodTest" \
+curl -v GET "https://rangehealthpro.com/api/person/7231410cf0d618312737f24/labresult/?test=RBC" \
   -H "Content-Type:application/json" 
  ```
 
@@ -397,10 +404,10 @@ curl -v GET "http://rangehealthpro.com/api/person/7231410cf0d618312737f24/labres
 
 
 
-## List prescriptions of specified person
+## List prescriptions for specified person
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/person/947260cf0d618312737f24/rx-timeline/?test=urineTest" \
+curl -v GET "https://rangehealthpro.com/api/person/947260cf0d618312737f24/rx-timeline/?test=urineTest" \
   -H "Content-Type:application/json" 
  ```
 
@@ -409,10 +416,10 @@ curl -v GET "http://rangehealthpro.com/api/person/947260cf0d618312737f24/rx-time
 
 `GET /api/person/:id/rx-timeline`
 
-## List entries of logged-in user
+## Limited list of entries for patient connections of logged-in user
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/entry/?limit=5" \
+curl -v GET "https://rangehealthpro.com/api/entry/?limit=5" \
   -H "Content-Type:application/json" 
  ```
 
@@ -424,7 +431,7 @@ curl -v GET "http://rangehealthpro.com/api/entry/?limit=5" \
 ## Read profile of logged-in user
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/profile" \
+curl -v GET "https://rangehealthpro.com/api/profile" \
   -H "Content-Type:application/json" 
  ```
 
@@ -438,7 +445,7 @@ curl -v GET "http://rangehealthpro.com/api/profile" \
 ## Update profile of logged-in user
 
 ```shell
-curl -v PUT "http://rangehealthpro.com/api/profile" \
+curl -v PUT "https://rangehealthpro.com/api/profile" \
   -H "Content-Type:application/json" \
   -d '{
   		"profile": 
@@ -450,7 +457,7 @@ curl -v PUT "http://rangehealthpro.com/api/profile" \
                 	description: "I am updated prefs",
                 	comments: "hey, nice article",
                 	address: "4660, West 10th Avenue",
-                	phone: 777757169
+                	phone: 777.757.7169
                 }
   			}
   	}'
@@ -466,7 +473,7 @@ curl -v PUT "http://rangehealthpro.com/api/profile" \
 ## Read permissions of logged-in user
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/permission" \
+curl -v GET "https://rangehealthpro.com/api/permission" \
   -H "Content-Type:application/json" 
  ```
 
@@ -485,7 +492,7 @@ curl -v GET "http://rangehealthpro.com/api/permission" \
 
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/connection/?status=connected&type=pro" \
+curl -v GET "https://rangehealthpro.com/api/connection/?status=connected&type=pro" \
   -H "Content-Type:application/json"
  ```
 
@@ -499,7 +506,7 @@ curl -v GET "http://rangehealthpro.com/api/connection/?status=connected&type=pro
 
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/connection/558051f9cf0d618312737f67/?status=connected&type=pro" \
+curl -v GET "https://rangehealthpro.com/api/connection/558051f9cf0d618312737f67/?status=connected&type=pro" \
   -H "Content-Type:application/json"
  ```
 
@@ -508,12 +515,12 @@ curl -v GET "http://rangehealthpro.com/api/connection/558051f9cf0d618312737f67/?
 
 `GET /api/connection/:userId`
 
-## Create a new pro connection for the logged in user
+## Create a new pro connection request to the target user
 
 
 
 ```shell
-curl -v POST "http://rangehealthpro.com/api/connection" \
+curl -v POST "https://rangehealthpro.com/api/connection" \
   -H "Content-Type:application/json" \
   -d '{
   		"target": 55805e90cf0d618312737e39
@@ -525,12 +532,12 @@ curl -v POST "http://rangehealthpro.com/api/connection" \
 
 `POST /api/connection/`
 
-## Confirm a new pro connection for the logged in user
+## Accept specified professional connection request
 
 
 
 ```shell
-curl -v PUT "http://rangehealthpro.com/api/connection/55805e90cf0d618312737e39" \
+curl -v PUT "https://rangehealthpro.com/api/connection/55805e90cf0d618312737e39" \
   -H "Content-Type:application/json" 
  ```
 
@@ -540,12 +547,12 @@ curl -v PUT "http://rangehealthpro.com/api/connection/55805e90cf0d618312737e39" 
 `PUT /api/connection/:userId`
 
 
-## Deletes the specified connection of any type from the logged in user
+## Reject the specified connection request
 
 
 
 ```shell
-curl -v DELETE "http://rangehealthpro.com/api/connection/55805e90cf0d618312737e39" \
+curl -v DELETE "https://rangehealthpro.com/api/connection/55805e90cf0d618312737e39" \
   -H "Content-Type:application/json" 
  ```
 
@@ -556,12 +563,12 @@ curl -v DELETE "http://rangehealthpro.com/api/connection/55805e90cf0d618312737e3
 
 # Connection Requests
 
-## List the connection requests of logged-in user
+## List the patient referral requests for the logged-in user
 
 
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/connection-request/?status=pending&type=pro" \
+curl -v GET "https://rangehealthpro.com/api/connection-request/?status=pending&type=pro" \
   -H "Content-Type:application/json" 
  ```
 
@@ -572,12 +579,11 @@ curl -v GET "http://rangehealthpro.com/api/connection-request/?status=pending&ty
 
 
 
-## List the connection requests of specific user
-
+## Retrieve the specified patient referral request
 
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/connection-request/55805e90cf0d618312737e39/?status=pending" \
+curl -v GET "https://rangehealthpro.com/api/connection-request/55805e90cf0d618312737e39/?status=pending" \
   -H "Content-Type:application/json" 
  ```
 
@@ -587,12 +593,12 @@ curl -v GET "http://rangehealthpro.com/api/connection-request/55805e90cf0d618312
 `GET /api/connection-request/:id`
 
 
-## Create a connection request for logged-in user to specified target
+## Create a patient referral request for logged-in user to specified target
 
 
 
 ```shell
-curl -v POST "http://rangehealthpro.com/api/connection-request" \
+curl -v POST "https://rangehealthpro.com/api/connection-request" \
   -H "Content-Type:application/json" \
   -d '{
   		"target": 67543e90cf0d618312737q31,
@@ -607,12 +613,12 @@ curl -v POST "http://rangehealthpro.com/api/connection-request" \
 `POST /api/connection-request`
 
 
-## Confirm a connection request and make logged-in user fully connected with specified user
+## Accept patient referral request
 
 
 
 ```shell
-curl -v PUT "http://rangehealthpro.com/api/connection-request/72839e90cf0d618312737q31" \
+curl -v PUT "https://rangehealthpro.com/api/connection-request/72839e90cf0d618312737q31" \
   -H "Content-Type:application/json" 
  ```
 
@@ -623,12 +629,12 @@ curl -v PUT "http://rangehealthpro.com/api/connection-request/72839e90cf0d618312
 
 
 
-## Delete a connection request and make logged-in user fully disconnected with specified user
+## Reject patient referral request
 
 
 
 ```shell
-curl -v DELETE "http://rangehealthpro.com/api/connection-request/75039e90cf0d618312737f24" \
+curl -v DELETE "https://rangehealthpro.com/api/connection-request/75039e90cf0d618312737f24" \
   -H "Content-Type:application/json" 
  ```
 
@@ -642,7 +648,7 @@ curl -v DELETE "http://rangehealthpro.com/api/connection-request/75039e90cf0d618
 ## Get specified attachment
 
 ```shell
-curl -v GET "http://rangehealthpro.com/attach/774059e90cf0d618312737f24" \
+curl -v GET "https://rangehealthpro.com/attach/774059e90cf0d618312737f24" \
   -H "Content-Type:application/json" 
  ```
 
@@ -655,7 +661,7 @@ curl -v GET "http://rangehealthpro.com/attach/774059e90cf0d618312737f24" \
 ## Read specified attachment
 
 ```shell
-curl -v GET "http://rangehealthpro.com/attach/991759e90cf0d618312737f24/testFile.txt" \
+curl -v GET "https://rangehealthpro.com/attach/991759e90cf0d618312737f24/testFile.txt" \
   -H "Content-Type:application/json" 
  ```
 
@@ -668,7 +674,7 @@ curl -v GET "http://rangehealthpro.com/attach/991759e90cf0d618312737f24/testFile
 ## Create an attachment
 
 ```shell
-curl -v POST "http://rangehealthpro.com/attach" \
+curl -v POST "https://rangehealthpro.com/attach" \
   -H "Content-Type:application/json" 
  ```
 
@@ -681,7 +687,7 @@ curl -v POST "http://rangehealthpro.com/attach" \
 ## Delete an attachment
 
 ```shell
-curl -v DELETE "http://rangehealthpro.com/attach/348269e90cf0d618312737f24" \
+curl -v DELETE "https://rangehealthpro.com/attach/348269e90cf0d618312737f24" \
   -H "Content-Type:application/json" 
  ```
 
@@ -695,10 +701,10 @@ curl -v DELETE "http://rangehealthpro.com/attach/348269e90cf0d618312737f24" \
 
 # Organizations
 
-## List orgs of logged-in user
+## List all organizations
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/org" \
+curl -v GET "https://rangehealthpro.com/api/org" \
   -H "Content-Type:application/json" 
  ```
 
@@ -707,10 +713,10 @@ curl -v GET "http://rangehealthpro.com/api/org" \
 
 `GET /api/org`
 
-## List orgs of specified user
+## Get specified organization details
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/org/232155cf0d618312737f24" \
+curl -v GET "https://rangehealthpro.com/api/org/232155cf0d618312737f24" \
   -H "Content-Type:application/json" 
  ```
 
@@ -721,22 +727,22 @@ curl -v GET "http://rangehealthpro.com/api/org/232155cf0d618312737f24" \
 
 
 
-## Create specified org for logged in user
+## Create new organization
 
 ```shell
-curl -v POST "http://rangehealthpro.com/api/org" \
+curl -v POST "https://rangehealthpro.com/api/org" \
   -H "Content-Type:application/json" \
   -d '{
   		"profile": 
   			{
   				"prefs": 
   					{
-  					"fullname": "John Doe",
-                	email: doe@john.com,
-                	description: "I am updated prefs",
-                	comments: "hey, nice article",
+  					"fullname": "Organization Name",
+                	email: org@email.com,
+                	description: "Organization description",
+                	comments: "Internal field",
                 	address: "4660, West 10th Avenue",
-                	phone: 777757169
+                	phone: 777.757.1690
                 }
   			}
   	}'
@@ -747,22 +753,22 @@ curl -v POST "http://rangehealthpro.com/api/org" \
 
 `POST /api/org`
 
-## Update specified org for logged in user
+## Update organization details
 
 ```shell
-curl -v PUT "http://rangehealthpro.com/api/org/483958cf0d618312737f24" \
+curl -v PUT "https://rangehealthpro.com/api/org/483958cf0d618312737f24" \
   -H "Content-Type:application/json" \
   -d '{
   		"profile": 
   			{
   				"prefs": 
   					{
-  					"fullname": "John Doe",
-                	email: doe@john.com,
-                	description: "I am updated prefs",
-                	comments: "hey, nice article",
+  					"fullname": "Organization Name",
+                	email: org@email.com,
+                	description: "New organization description",
+                	comments: "Internal field",
                 	address: "4660, West 10th Avenue",
-                	phone: 777757169
+                	phone: 777.757.1699
                 }
   			}
   	}'
@@ -774,10 +780,10 @@ curl -v PUT "http://rangehealthpro.com/api/org/483958cf0d618312737f24" \
 `PUT /api/org/:id`
 
 
-## Delete specified org for logged in user
+## Delete specified organization
 
 ```shell
-curl -v DELETE "http://rangehealthpro.com/api/org/912378cf0d618312737f24" \
+curl -v DELETE "https://rangehealthpro.com/api/org/912378cf0d618312737f24" \
   -H "Content-Type:application/json" 
  ```
 
@@ -790,7 +796,7 @@ curl -v DELETE "http://rangehealthpro.com/api/org/912378cf0d618312737f24" \
 ## List membership requests for current user
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/membership-request/?status=pending" \
+curl -v GET "https://rangehealthpro.com/api/membership-request/?status=pending" \
   -H "Content-Type:application/json" 
  ```
 
@@ -803,7 +809,7 @@ curl -v GET "http://rangehealthpro.com/api/membership-request/?status=pending" \
 ## List membership requests for specified orgId
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/org/45234868cf0d618312737f24/membership-request/?status=pending" \
+curl -v GET "https://rangehealthpro.com/api/org/45234868cf0d618312737f24/membership-request/?status=pending" \
   -H "Content-Type:application/json" 
  ```
 
@@ -815,10 +821,10 @@ curl -v GET "http://rangehealthpro.com/api/org/45234868cf0d618312737f24/membersh
 
 
 
-## Read specified membership request for specified orgId
+## Retrieve membership request details
 
 ```shell
-curl -v GET "http://rangehealthpro.com/api/org/4523e64o62618312737f24/membership-request/567868cf0d618312737f24/?status=connected" \
+curl -v GET "https://rangehealthpro.com/api/org/4523e64o62618312737f24/membership-request/567868cf0d618312737f24/?status=connected" \
   -H "Content-Type:application/json" 
  ```
 
@@ -829,10 +835,10 @@ curl -v GET "http://rangehealthpro.com/api/org/4523e64o62618312737f24/membership
 
 
 
-## Create membership request for specified orgId
+## Create membership request for specified organization
 
 ```shell
-curl -v POST "http://rangehealthpro.com/api/org/4523464362/membership-request/?subject="exampleMembRequest"" \
+curl -v POST "https://rangehealthpro.com/api/org/4523464362/membership-request/?subject=exampleMembRequest" \
   -H "Content-Type:application/json" 
  ```
 
@@ -843,10 +849,10 @@ curl -v POST "http://rangehealthpro.com/api/org/4523464362/membership-request/?s
 
 
 
-## Approve membership request for specified org with specified id
+## Approve membership request
 
 ```shell
-curl -v PUT "http://rangehealthpro.com/api/org/4523868cf0d618312737f24/membership-request/98758v1cf0d618312737f24/" \
+curl -v PUT "https://rangehealthpro.com/api/org/4523868cf0d618312737f24/membership-request/98758v1cf0d618312737f24/" \
   -H "Content-Type:application/json" 
  ```
 
@@ -857,10 +863,10 @@ curl -v PUT "http://rangehealthpro.com/api/org/4523868cf0d618312737f24/membershi
 
 
 
-## Delete membership request for specified org with specified id
+## Reject membership request
 
 ```shell
-curl -v DELETE "http://rangehealthpro.com/api/org/45234868cf0d618312737f24/membership-request/9875869acf0d618312737f24/" \
+curl -v DELETE "https://rangehealthpro.com/api/org/45234868cf0d618312737f24/membership-request/9875869acf0d618312737f24/" \
   -H "Content-Type:application/json" 
  ```
 
@@ -873,7 +879,7 @@ curl -v DELETE "http://rangehealthpro.com/api/org/45234868cf0d618312737f24/membe
 ## Delete membership of logged-in user with specified org
 
 ```shell
-curl -v DELETE "http://rangehealthpro.com/api/org/45234868cf0d618312737f24/membership" \
+curl -v DELETE "https://rangehealthpro.com/api/org/45234868cf0d618312737f24/membership" \
   -H "Content-Type:application/json" 
  ```
 
@@ -881,5 +887,6 @@ curl -v DELETE "http://rangehealthpro.com/api/org/45234868cf0d618312737f24/membe
 ### HTTP Request
 
 `DELETE /api/org/:orgId/membership`
+
 
 
