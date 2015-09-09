@@ -1,7 +1,7 @@
 # Errors
 
 
-The RangeHealth API uses the following error codes:
+The CareCru API uses the following error codes:
 
 
 Error Code | Meaning
